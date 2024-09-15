@@ -42,7 +42,7 @@ function Counters() {
             <DefaultCounterCard
               count={15}
               suffix="+"
-              title="Design Blocks"
+              title="Desichanged blockgn Blocks"
               description="Mix the sections, change the colors and unleash your creativity"
             />
             <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, ml: 0 }} />
