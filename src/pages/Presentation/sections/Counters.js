@@ -34,7 +34,7 @@ function Counters() {
               count={70}
               suffix="+"
               title="sdi ui "
-              description="From buttons, to inputs, navbars, alerts or cards, you are covered"
+              description="changed the text"
             />
           </Grid>
           <Grid item xs={12} md={4} display="flex">
