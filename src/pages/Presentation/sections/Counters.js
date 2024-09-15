@@ -33,7 +33,7 @@ function Counters() {
             <DefaultCounterCard
               count={70}
               suffix="+"
-              title="Coded Elements"
+              title="sdi ui "
               description="From buttons, to inputs, navbars, alerts or cards, you are covered"
             />
           </Grid>
