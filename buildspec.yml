@@ -7,12 +7,14 @@ phases:
    
     commands:
         # install npm
+        - export NODE_OPTIONS=--openssl-legacy-provider
         - npm install
         - npm install react-scripts --save
        
   build:
     commands:
         # run build script
+        - export NODE_OPTIONS=--openssl-legacy-provider
         - npm run build
      
 artifacts:
