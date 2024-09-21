@@ -4,6 +4,7 @@
 cd /app
 
 # install node and npm
+export NODE_OPTIONS=--openssl-legacy-provider
 apt-get install curl
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 apt-get install nodejs -y

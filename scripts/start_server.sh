@@ -10,5 +10,6 @@
 # pm2 startup
 # pm2 save
 # pm2 restart all
+export NODE_OPTIONS=--openssl-legacy-provider
 systemctl -l enable nginx
 systemctl -l start nginx
