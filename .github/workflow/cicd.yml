@@ -1,27 +1,46 @@
-name: Deploy
+name: Push-to-EC2 instance
 
+# Trigger deployment only on push to main branch 
 on:
   push:
     branches:
       - main
-  pull_request:
-    types: [closed]
-  workflow_dispatch
 
 jobs:
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: self-hosted
+    name: Push to EC2
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+      - name: Checkout the code
+        uses: actions/checkout@v1
 
-      - name: Build and Deploy
-        run: |
-          cd /home/ubuntu/sdi-ui
-          git pull origin main
-          npm install
-          npm run build --production
-          sudo cp -R dist/ /var/www/vhosts/frontend/
-          sudo service nginx restart 
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo yum -y update
+            sudo yum install -y httpd
+            sudo systemctl start httpd
+            sudo systemctl enable httpd
+            cd /home
+            ls
+            cd ec2-user
+            sudo yum install nodejs npm -y
+            npm install
+            sudo npm run build
+            cd build
+            sudo mv * /var/www/html
+            sudo systemctl restart httpd
