@@ -1,30 +1,32 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import BookDetails from './components/BookDetails/BookDetails';
+import BookList from './components/BookList/BookList';
+import { AppProvider } from './context.';
+import './index.css';
+import About from './pages/About/About';
+import Home from './pages/Home/Home';
+import HomePage from './pages/HomePage/HomePage';
+import Library from './pages/Library/Library';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import React from "react";
-import * as ReactDOMClient from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "App";
-
-const container = document.getElementById("root");
-
-// Create a root.
-const root = ReactDOMClient.createRoot(container);
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+	<AppProvider>
+		<BrowserRouter>
+			<Routes>
+				<Route path='dashboard' element={<Home />}>
+					<Route path='about' element={<About />} />
+					<Route path='book' element={<BookList />} />
+				</Route>
+				<Route path='/' element={<HomePage />} />
+				<Route path='register' element={<Register />} />
+				<Route path='login' element={<Login />} />
+				<Route path='library' element={<Library />} />
+				<Route path='book/:id' element={<BookDetails />} />
+			</Routes>
+		</BrowserRouter>
+	</AppProvider>
 );
