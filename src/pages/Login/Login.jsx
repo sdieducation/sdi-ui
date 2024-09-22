@@ -52,7 +52,7 @@ const Login = () => {
 
 			<div className='App'>
 				<form onSubmit={handleSubmit}>
-					<h1>Login to NerdsHub</h1>
+					<h1>Login to SDI GURUKULAM</h1>
 
 					<input
 						type='text'

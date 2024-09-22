@@ -36,7 +36,7 @@ export default function App() {
 			>
 				© 2023 Copyright:
 				<a className='text-white' href='http://localhost:3000/'>
-					NerdsHub
+					SDI GURUKULAM
 				</a>
 			</div>
 		</MDBFooter>
